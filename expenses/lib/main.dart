@@ -3,14 +3,15 @@ import 'dart:math';
 import './components/transaction_form.dart';
 import './components/transaction_list.dart';
 import 'models/transaction.dart';
- 
- main() => runApp(ExpensesApp());
- 
- class ExpensesApp extends StatelessWidget {
+import 'components/chart.dart';
+
+main() => runApp(ExpensesApp());
+
+class ExpensesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData tema = ThemeData();
- 
+
     return MaterialApp(
       home: MyHomePage(),
       theme: tema.copyWith(
@@ -36,14 +37,14 @@ import 'models/transaction.dart';
       ),
     );
   }
- }
- 
- class MyHomePage extends StatefulWidget {
+}
+
+class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
- }
- 
- class _MyHomePageState extends State<MyHomePage> {
+}
+
+class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _transactions = [
     // Transaction(
     //   id: 't1',
@@ -58,7 +59,15 @@ import 'models/transaction.dart';
     //   date: DateTime.now(),
     // ),
   ];
- 
+
+  List<Transaction> get _recentTransactions {
+    return _transactions
+        .where((tr) => tr.date.isAfter(DateTime.now().subtract(
+              Duration(days: 7),
+            ))
+        ).toList();
+  }
+
   _addTransaction(String title, double value) {
     final newTransaction = Transaction(
       id: Random().nextDouble().toString(),
@@ -66,14 +75,14 @@ import 'models/transaction.dart';
       value: value,
       date: DateTime.now(),
     );
- 
+
     setState(() {
       _transactions.add(newTransaction);
     });
- 
+
     Navigator.of(context).pop();
   }
- 
+
   _openTransactionFormModal(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -82,7 +91,7 @@ import 'models/transaction.dart';
       },
     );
   }
- 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,14 +108,7 @@ import 'models/transaction.dart';
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              width: double.infinity,
-              child: Card(
-                color: Colors.blue,
-                child: Text('Gráfico'),
-                elevation: 5,
-              ),
-            ),
+              Chart(_recentTransactions),
             TransactionList(_transactions),
           ],
         ),
@@ -118,4 +120,4 @@ import 'models/transaction.dart';
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
- }
+}
