@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
- import 'dart:math';
- import './components/transaction_form.dart';
- import './components/transaction_list.dart';
- import 'models/transaction.dart';
+import 'dart:math';
+import './components/transaction_form.dart';
+import './components/transaction_list.dart';
+import 'models/transaction.dart';
  
  main() => runApp(ExpensesApp());
  
@@ -20,7 +20,7 @@ import 'package:flutter/material.dart';
         ),
         textTheme: tema.textTheme.copyWith(
           headline6: TextStyle(
-            fontFamily: 'OpenSans',
+            fontFamily: 'Quicksand',
             fontSize: 18,
             fontWeight: FontWeight.bold,
             color: Colors.black,
@@ -28,7 +28,7 @@ import 'package:flutter/material.dart';
         ),
         appBarTheme: AppBarTheme(
           titleTextStyle: TextStyle(
-            fontFamily: 'OpenSans',
+            fontFamily: 'Quicksand',
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
@@ -44,19 +44,19 @@ import 'package:flutter/material.dart';
  }
  
  class _MyHomePageState extends State<MyHomePage> {
-  final _transactions = [
-    Transaction(
-      id: 't1',
-      title: 'Novo Tênis de Corrida',
-      value: 310.76,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'Conta de Luz',
-      value: 211.30,
-      date: DateTime.now(),
-    ),
+  final List<Transaction> _transactions = [
+    // Transaction(
+    //   id: 't1',
+    //   title: 'Novo Tênis de Corrida',
+    //   value: 310.76,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: 't2',
+    //   title: 'Conta de Luz',
+    //   value: 211.30,
+    //   date: DateTime.now(),
+    // ),
   ];
  
   _addTransaction(String title, double value) {
