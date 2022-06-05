@@ -26,6 +26,10 @@ class ExpensesApp extends StatelessWidget {
             fontWeight: FontWeight.bold,
             color: Colors.black,
           ),
+          button: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          )
         ),
         appBarTheme: AppBarTheme(
           titleTextStyle: TextStyle(
@@ -68,12 +72,12 @@ class _MyHomePageState extends State<MyHomePage> {
         ).toList();
   }
 
-  _addTransaction(String title, double value) {
+  _addTransaction(String title, double value, DateTime date) {
     final newTransaction = Transaction(
       id: Random().nextDouble().toString(),
       title: title,
       value: value,
-      date: DateTime.now(),
+      date: date,
     );
 
     setState(() {
